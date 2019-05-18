@@ -34,7 +34,7 @@ SC_MODULE(float_register)
     }
 
     SC_CTOR (float_register){
-        SC_CTHREAD(delay_output);
+        SC_CTHREAD(delay_output, clock.pos() );
         sensitive ( reset, clock )
     }
 
