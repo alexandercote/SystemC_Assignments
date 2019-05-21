@@ -3,6 +3,7 @@
 #include "float_multiplier.h"
 #include "float_register.h"
 
+
 SC_MODULE( a1_digital_filter )
 {
     sc_in <float> x_input;
@@ -93,4 +94,4 @@ SC_MODULE( a1_digital_filter )
 
 
     }
-}
+};

@@ -4,11 +4,14 @@
 #include "float_adder.h"
 #include "float_multiplier.h"
 #include "float_register.h"
+#include <iostream>
+#include <iomanip>
 
-int sc_main(int argc, char* argv[])
+int sc_main()
 {
-    sc_signal <float> XSig, YSig
-    sc_signal <bool> RstSig
+    sc_signal <float> XSig;
+    sc_signal <float> YSig;
+    sc_signal <bool> RstSig;
     sc_clock TestClk ("Testclock", 10, SC_NS, 0.5, 0, SC_NS);
 
 
@@ -38,7 +41,8 @@ int sc_main(int argc, char* argv[])
 
 
     sc_start (20, SC_NS);
+
+    sc_close_vcd_trace_file(Tf);
+
     return 0;
-
-
-}
+};

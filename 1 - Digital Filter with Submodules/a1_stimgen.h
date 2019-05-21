@@ -14,7 +14,7 @@ SC_MODULE(a1_stim)
         reset.write(true); 
         wait();
         // Pulse 2 - Reset goes low, X goes high.
-        reset.write(false)
+        reset.write(false);
         x_input.write(1);
         wait();
         // Pulse 3 - Set X low
@@ -27,6 +27,7 @@ SC_MODULE(a1_stim)
     SC_CTOR (a1_stim)
     {
         SC_CTHREAD(stimgen, clock.pos() );
+
         x_input.initialize(0);
         reset.initialize(false);
     }

@@ -11,15 +11,15 @@ SC_MODULE(float_register)
 
     void delay_output()
     {
-        sc_signal<float> delay_store = 0;
-        output.write(0);  
+        sc_signal<float> delay_store;
+        outputval.write(0);  
 
         while(true)
         {
             if(reset.read() == true)
             {
                 delay_store.write(0);
-                output.write(0);
+                outputval.write(0);
             }
             else
             {
@@ -35,7 +35,9 @@ SC_MODULE(float_register)
 
     SC_CTOR (float_register){
         SC_CTHREAD(delay_output, clock.pos() );
-        sensitive ( reset, clock )
+        sensitive << reset << clock;
+
+	delay_store.write(0);
     }
 
 };

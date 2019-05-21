@@ -14,7 +14,7 @@ SC_MODULE(float_adder)
     SC_CTOR (float_adder)
     {
         SC_METHOD(float_add);
-        sensitive ( A, B )
+        sensitive << A << B;
     }
 
 };

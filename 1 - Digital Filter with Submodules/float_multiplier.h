@@ -14,7 +14,7 @@ SC_MODULE(float_multiplier)
     SC_CTOR (float_multiplier)
     {
         SC_METHOD(float_mult);
-        sensitive ( A, B )
+        sensitive <<  A << B;
     }
 
 };
