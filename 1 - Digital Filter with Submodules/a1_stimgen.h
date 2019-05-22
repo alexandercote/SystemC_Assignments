@@ -1,8 +1,6 @@
-
 #include "systemc.h"
-#include <iomanip>
 
-SC_MODULE(a1_stim)
+SC_MODULE(a1_stimulus)
 {
     sc_out <float> x_input;
     sc_out <bool> reset;
@@ -24,7 +22,7 @@ SC_MODULE(a1_stim)
         sc_stop();
     }
 
-    SC_CTOR (a1_stim)
+    SC_CTOR (a1_stimulus)
     {
         SC_CTHREAD(stimgen, clock.pos() );
 

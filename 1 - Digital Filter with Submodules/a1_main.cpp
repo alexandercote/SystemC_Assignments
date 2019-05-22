@@ -15,18 +15,18 @@ int sc_main()
     sc_clock TestClk ("Testclock", 10, SC_NS, 0.5, 0, SC_NS);
 
 
-    stimgen Stimulus1 ("Stimulator");
+	a1_stimulus Stimulus1 ("Stimulator");
     Stimulus1.x_input(XSig); 
     Stimulus1.reset(RstSig);
     Stimulus1.clock(TestClk);
 
-    monitor Monitor1 ("MonitorTask");
+	a1_monitor Monitor1 ("MonitorTask");
     Monitor1.x_input(XSig);
     Monitor1.y_output(YSig);
     Monitor1.reset(RstSig);
     Monitor1.clock(TestClk);
 
-    digital_filter DF1 ("A1_Digital_Filter");
+	a1_digital_filter DF1 ("A1_Digital_Filter");
     DF1.x_input(XSig);
     DF1.y_output(YSig);
     DF1.reset(RstSig);
@@ -41,6 +41,7 @@ int sc_main()
 
 
     sc_start (20, SC_NS);
+
 
     sc_close_vcd_trace_file(Tf);
 
