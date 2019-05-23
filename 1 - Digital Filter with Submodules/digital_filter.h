@@ -32,15 +32,15 @@ SC_MODULE( a1_digital_filter )
 
 
     SC_CTOR (a1_digital_filter):
-        zdelay_1("Leftmost Delay Filter"),
-        zdelay_2("Rightmost Delay Filter"),
-        add_1("X with Feedback"),
-        add_2("Delay And Add Result"),
-        add_3("2nd Delay and Feedforward"),
-        add_4("2nd Delay and Add_2"),
-        mult_1("Add_2 to Add_1"),
-        mult_2("Delay to Add_2"),
-        mult_3("Add_3 to Add_2")
+        zdelay_1("Leftmost_Delay_Filter"),
+        zdelay_2("Rightmost_Delay_Filter"),
+        add_1("X_with_Feedback"),
+        add_2("Delay_And_Add_Result"),
+        add_3("Second_Delay_and_Feedforward"),
+        add_4("Second_Delay_and_Add_2"),
+        mult_1("Add_2_to_Add_1"),
+        mult_2("Delay_to_Add_2"),
+        mult_3("Add_3_to_Add_2")
 
     {
         // Constant Variable Definitions
@@ -76,12 +76,12 @@ SC_MODULE( a1_digital_filter )
         add_2.input2(output_mult_3);
         add_2.outputval(output_add_2);
 
-        //float_adder add_3("2nd Delay and Feedforward")
+        //float_adder add_3("2nd_Delay_and_Feedforward")
         add_3.input1(output_reg_2);
         add_3.input2(x_input);
         add_3.outputval(output_add_3);
 
-        //float_adder add_4("2nd Delay and Add_2")
+        //float_adder add_4("2nd_Delay_and_Add_2")
         add_4.input1(output_reg_2);
         add_4.input2(output_add_2);
         add_4.outputval(output_add_4);

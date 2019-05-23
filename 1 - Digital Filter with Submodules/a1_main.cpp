@@ -10,7 +10,7 @@ int sc_main(int argc, char* argv[])
     sc_signal <float> XSig;
     sc_signal <float> YSig;
     sc_signal <bool> RstSig;
-    sc_clock TestClk ("Testclock", 10, SC_NS, 0.5, 0, SC_NS);
+    sc_clock TestClk ("Testclock", 10, SC_NS, 0.5, 1, SC_NS);
 
     a1_stimulus Stimulus1 ("Stimulator");
     Stimulus1.x_input(XSig); 
@@ -36,7 +36,7 @@ int sc_main(int argc, char* argv[])
     sc_trace(Tf, RstSig, "RST");
 
 
-    sc_start (20, SC_NS);
+    sc_start (400, SC_NS);
 
 
     sc_close_vcd_trace_file(Tf);
