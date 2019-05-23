@@ -14,7 +14,7 @@ SC_MODULE( a1_digital_filter )
 
     float_register zdelay_1, zdelay_2;
     float_adder add_1, add_2, add_3, add_4;
-    float_multiplier mult_1, mult_2, mult_3
+    float_multiplier mult_1, mult_2, mult_3;
 
     sc_signal <float> output_reg_1;
     sc_signal <float> output_reg_2;
@@ -25,6 +25,10 @@ SC_MODULE( a1_digital_filter )
     sc_signal <float> output_mult_1;
     sc_signal <float> output_mult_2;
     sc_signal <float> output_mult_3;
+
+    sc_signal <float> mult_1_const;
+    sc_signal <float> mult_2_const;
+    sc_signal <float> mult_3_const;
 
 
     SC_CTOR (a1_digital_filter):
@@ -39,6 +43,12 @@ SC_MODULE( a1_digital_filter )
         mult_3("Add_3 to Add_2")
 
     {
+        // Constant Variable Definitions
+        mult_1_const.write(-1);
+        mult_2_const.write(0.5);
+        mult_3_const.write(0.25);
+
+
         // Registers
 
         //float_register zdelay_1("Leftmost Delay Filter");
@@ -79,15 +89,15 @@ SC_MODULE( a1_digital_filter )
 
         // Multipliers
         mult_1.input1(output_add_2);
-        mult_1.input2(-1);
+        mult_1.input2(mult_1_const);
         mult_1.outputval(output_mult_1);
 
         mult_2.input1(output_reg_1);
-        mult_2.input2(0.5);
+        mult_2.input2(mult_2_const);
         mult_2.outputval(output_mult_2);
 
         mult_3.input1(output_add_3);
-        mult_3.input2(0.25);
+        mult_3.input2(mult_3_const);
         mult_3.outputval(output_mult_3);
 
 

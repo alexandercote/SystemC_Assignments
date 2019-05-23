@@ -19,6 +19,7 @@ SC_MODULE(a1_monitor)
             cout << setw(10) << sc_time_stamp();
             cout << setw(2) << x_input.read() << setw(2) << y_output.read();
             wait(); // wait until next event on x, y
+	}
     }
 
     SC_CTOR (a1_monitor)

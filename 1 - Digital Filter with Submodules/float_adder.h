@@ -3,18 +3,18 @@
 
 SC_MODULE(float_adder)
 {
-    sc_in <float> A, B;
-    sc_out <float> F;
+    sc_in <float> input1, input2;
+    sc_out <float> outputval;
 
     void float_add()
     {
-        F.write( A.read() + B.read() );
+        outputval.write( input1.read() + input2.read() );
     }
 
     SC_CTOR (float_adder)
     {
         SC_METHOD(float_add);
-        sensitive << A << B;
+        sensitive << input1 << input2;
     }
 
 };

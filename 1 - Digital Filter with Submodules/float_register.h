@@ -9,35 +9,24 @@ SC_MODULE(float_register)
     sc_in <float> inputval;
     sc_out <float> outputval;
 
+    sc_signal<float> delay_store;
+
     void delay_output()
     {
-        sc_signal<float> delay_store;
+        delay_store.write(0);
         outputval.write(0);  
 
         while(true)
         {
-            if(reset.read() == true)
-            {
-                delay_store.write(0);
-                outputval.write(0);
-            }
-            else
-            {
-                if(delay_store != 0)
-                {
-                    outputval.write(delay_store);
-                }
-                delay_store.write(inputval);
-            }
-        wait();   
+	     delay_store.write(inputval);
+	     wait();   
+	     outputval.write(delay_store);
         }
     }
 
     SC_CTOR (float_register){
         SC_CTHREAD(delay_output, clock.pos() );
-        sensitive << reset << clock;
-
-	delay_store.write(0);
+        reset_signal_is(reset, true);
     }
 
 };
