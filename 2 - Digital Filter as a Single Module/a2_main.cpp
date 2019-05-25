@@ -1,4 +1,6 @@
 #include "systemc.h"
+#include "a2_monitor.h"
+#include "a2_stimgen.h"
 #include "behavioural_digital_filter.h"
 #include <iostream>
 #include <iomanip>
@@ -10,12 +12,12 @@ int sc_main(int argc, char* argv[])
     sc_signal <bool> RstSig;
     sc_clock TestClk ("Testclock", 10, SC_NS, 0.5, 1, SC_NS);
 
-    a1_stimulus Stimulus1 ("Stimulator");
+    stimulus Stimulus1 ("Stimulator");
     Stimulus1.x_input(XSig); 
     Stimulus1.reset(RstSig);
     Stimulus1.clock(TestClk);
 
-    a1_monitor Monitor1 ("MonitorTask");
+    monitor Monitor1 ("MonitorTask");
     Monitor1.x_input(XSig);
     Monitor1.y_output(YSig);
     Monitor1.clock(TestClk);
