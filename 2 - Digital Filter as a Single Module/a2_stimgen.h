@@ -18,8 +18,7 @@ SC_MODULE(stimulus)
         // Pulse 3 - Set X low
         x_input.write(0);
         wait();
-
-        sc_stop();
+        
     }
 
     SC_CTOR (stimulus)
