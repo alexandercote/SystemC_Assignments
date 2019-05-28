@@ -21,7 +21,6 @@ SC_MODULE( a1_digital_filter )
     sc_signal <float> output_add_1;
     sc_signal <float> output_add_2;
     sc_signal <float> output_add_3;
-    sc_signal <float> output_add_4;
     sc_signal <float> output_mult_1;
     sc_signal <float> output_mult_2;
     sc_signal <float> output_mult_3;
@@ -84,7 +83,7 @@ SC_MODULE( a1_digital_filter )
         //float_adder add_4("2nd_Delay_and_Add_2")
         add_4.input1(output_reg_2);
         add_4.input2(output_add_2);
-        add_4.outputval(output_add_4);
+        add_4.outputval(y_output);
 
 
         // Multipliers
@@ -99,9 +98,6 @@ SC_MODULE( a1_digital_filter )
         mult_3.input1(output_add_3);
         mult_3.input2(mult_3_const);
         mult_3.outputval(output_mult_3);
-
-
-
 
     }
 };

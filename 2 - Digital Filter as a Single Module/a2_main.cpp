@@ -36,7 +36,7 @@ int sc_main(int argc, char* argv[])
     sc_trace(Tf, RstSig, "RST");
 
 
-    sc_start (400, SC_NS);
+    sc_start (202, SC_NS);
 
 
     sc_close_vcd_trace_file(Tf);

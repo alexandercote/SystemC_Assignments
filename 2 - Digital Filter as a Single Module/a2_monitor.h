@@ -13,11 +13,13 @@ SC_MODULE(monitor)
     void monitor_func()
     {
         cout << setw(10) << "Time";
-        cout << setw(2) << "X" << setw(2) << "Y";
+        cout << setw(3) << "X" << setw(12) << "Y";
+	cout << endl;
         while (true) 
         {
             cout << setw(10) << sc_time_stamp();
-            cout << setw(2) << x_input.read() << setw(2) << y_output.read();
+            cout << setw(3) << x_input.read()<< " " << setw(12) << y_output.read();
+	    cout << endl;
             wait(); // wait until next event on x, y
 	}
     }

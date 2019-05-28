@@ -13,14 +13,11 @@ SC_MODULE(float_register)
 
     void delay_output()
     {
-        delay_store.write(0);
         outputval.write(0);  
-
         while(true)
         {
-	     delay_store.write(inputval);
-	     wait();   
-	     outputval.write(delay_store);
+	     outputval.write(inputval.read());
+	     wait();
         }
     }
 
