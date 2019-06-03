@@ -21,9 +21,6 @@ SC_MODULE( a2_digital_filter )
 
     void update_signals()
     {
-        //sc_signal<float> delay_store_1, delay_store_2;
-        //delay_store_1.write(0);
-        //delay_store_2.write(0);
         zdelay_1_out.write(0);
         zdelay_2_out.write(0);
 
@@ -32,15 +29,6 @@ SC_MODULE( a2_digital_filter )
             zdelay_1_out.write(zdelay_1_in.read());
             zdelay_2_out.write(zdelay_2_in.read());
             wait();
-            /*
-            delay_store_1.write(zdelay_1_in.read());
-            delay_store_2.write(zdelay_2_in.read());
-
-            wait();
-
-            zdelay_1_out.write(delay_store_1.read());
-            zdelay_2_out.write(delay_store_2.read());
-            */
         }
     }
 
