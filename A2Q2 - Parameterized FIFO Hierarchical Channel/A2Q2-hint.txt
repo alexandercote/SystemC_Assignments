@@ -1,0 +1,89 @@
+-----------------------------------------------
+Partial code example for interface "fifo_if.h":
+
+...
+
+template <class T> class fifo_in_if: virtual public sc_interface
+{
+  public:
+  virtual bool read(T&) = 0;
+};
+
+...
+
+
+-----------------------------------------------
+Partial code example for channel "fifo.h":
+
+template <class T> class fifo : public sc_module, public fifo_out_if <T>, public fifo_in_if <T>
+{
+
+...
+
+  bool write(T data)
+  {
+    ...
+  }
+
+  bool read(T& data) 
+  {
+    ...
+  }
+   
+...
+ 
+
+-----------------------------------------------
+Partial code example for producer "producer.h":
+
+...
+
+template <class T> class producer : public sc_module 
+{
+public:
+  sc_port < fifo_out_if<T> > out;
+  ...
+
+  void do_writes()
+  {
+    T data = 0;
+    while (true) 
+    {
+      ...
+      
+      if (out->write(data)) 
+        cout << "W " << data << " at " << sc_time_stamp() << endl;
+	
+      ...
+    }
+  }
+  
+...
+
+
+-----------------------------------------------
+Partial code example for consumer "consumer.h":
+
+...
+
+template <class T> class consumer : public sc_module 
+{
+public:
+  sc_port < fifo_in_if<T> > in;
+  ...
+  
+  void do_reads()
+  {
+    T data;
+    while (true) 
+    {
+      ...
+      
+      if (in->read(data)) 
+        cout << "R " << data << " at " << sc_time_stamp() << endl;
+	
+      ...
+    }
+  } 
+  
+...
