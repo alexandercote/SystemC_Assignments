@@ -52,7 +52,6 @@ int sc_main(int argc, char* argv[])
     sc_close_vcd_trace_file(Tf);
 
 
-    // Rest of sc_main ...
 
     return 0;
 }
