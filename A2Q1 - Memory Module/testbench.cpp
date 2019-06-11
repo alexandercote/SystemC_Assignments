@@ -90,7 +90,34 @@ SC_MODULE(A2Q1_testbench)
 	new_comm.write(false);
 	wait();
 	
+	// Command 4 - Write 8-bits of data in 4 address.
+	data.write(5);
+	addr.write(9);
+	comm.write(WTBLK);
+	wait();
+	new_comm.write(true);
+        while( complete.read() == false )
+	{
+	    wait();
+	}
+	new_comm.write(false);
+	data.write(Z);
+	wait();
       
+	    
+	// Command 5 - Read 8 bits of data from addr 4,5,6,7.
+	data.write(Z);
+	addr.write(4);
+	comm.write(RDBLK);
+	wait();
+	new_comm.write(true);
+        while( complete.read() == false )
+	{
+	    wait();
+	}
+	
+	new_comm.write(false);
+	wait();
         
     }
 
