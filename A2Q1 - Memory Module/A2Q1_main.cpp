@@ -1,8 +1,8 @@
-// Example: Portion of sc_main.
-// Notice the use of "sc_signal_rv".
-
-
-#include ...
+#include "systemc.h"
+#include "testbench.h"
+#include "memory_module.h"
+#include <iostream>
+#include <iomanip>
 
 int sc_main(int argc, char* argv[])
 {
@@ -47,7 +47,7 @@ int sc_main(int argc, char* argv[])
     sc_trace(Tf, complete, "complete");
     sc_trace(Tf, reset, "reset");
     
-    sc_start (202, SC_NS);
+    sc_start (210, SC_NS);
 
     sc_close_vcd_trace_file(Tf);
 

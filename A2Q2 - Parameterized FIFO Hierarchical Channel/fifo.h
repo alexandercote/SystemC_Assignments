@@ -1,0 +1,88 @@
+#include "systemc.h"
+#include "fifo_if.h"
+
+template <class T, unsigned size> class fifo : public sc_module, public fifo_out_if <T>, public fifo_in_if <T>
+{
+	private:
+		T data[size]; 
+		int free, ri, wi;	//free space, read/write index
+		
+		bool read_flag, write_flag, read_status, write_status;
+		char* read_data;
+		char write_data;
+		
+	
+	public:
+		SC_HAS_PROCESS (fifo);
+		stack (sc_module_name nm) : sc_module (nm), top (0)
+		{
+			free = size;
+			ri = 0;
+			wi = 0;
+			
+			read_flag = false; 
+			write_flag = false;
+			read_status = false; 
+			write_status = false;
+			
+			SC_THREAD(arbitrator);
+			sensitive << read_req << write_req;
+		}
+		
+		void arbitrator() 
+		{
+			while (1) 
+			{
+				if (read_flag) 
+				{ // read_flag checked first: higher priority
+					read_flag = false;
+					if (free < N) 
+					{ // service read
+						*read_data = data[ri];
+						ri = (ri + 1) % size;
+						free++;
+						read_status = true;
+					}
+					else read_status = false;
+				} // end read_flag
+				
+				if (write_flag) 
+				{ // write_flag checked next: lower priority
+					write_flag = false;
+					if (free > 0) 
+					{ // service write
+						data[wi] = write_data;
+						wi = (wi + 1) % size;
+						free--;
+						write_status = true;
+					}
+					else write_status = false;
+				} // end write_flag			
+				
+				done.notify();
+				wait();
+			} // end while
+		 } // end arbitrator 
+
+
+		bool write(T data)
+		{
+			write_flag = true;
+			write_data = data; // make a local copy of the input argument
+			write_req.notify(); // pending event to trigger the arbitrator process
+			wait(done); // arbitrator done: write serviced
+			return write_status; // return a local copy of the output argument
+
+		}
+
+
+		bool read(T& data) 
+		{
+			read_flag = true;
+			read_data = &data; // make a local copy of the input argument
+			read_req.notify(); // pending event to trigger the arbitrator process
+			wait(done); // arbitrator done: read serviced
+			return read_status; // return a local copy of the output argument
+		}
+
+};
