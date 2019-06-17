@@ -15,13 +15,15 @@ template <class T> class consumer : public sc_module
 			T data;
 			while (true) 
 			{
+				wait();
 
 				if (in->read(data))
 				{	
-					cout << "R " << data << " at " << sc_time_stamp() << endl;
+				        cout << "@" << setw(6) << sc_time_stamp() 
+				             << " : Read  " << setw(2) << data
+				             << " , Wrote   " << endl; 
 				}
 			
-				wait();
 			} // end while
 		} // end do reads
 		

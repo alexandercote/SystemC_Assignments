@@ -15,7 +15,7 @@ int sc_main(int argc, char* argv[])
 	producer<int> P1 ("P1"); P1.out (Fifo1); P1.Clock (ClkFast);
 	consumer<int> C1 ("C1"); C1.in (Fifo1);  C1.Clock (ClkSlow);
 	 
-    sc_start (210, SC_NS);
+        sc_start (210, SC_NS);
 
     return 0;
 }

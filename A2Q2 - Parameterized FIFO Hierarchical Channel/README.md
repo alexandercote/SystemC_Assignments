@@ -1,45 +1,59 @@
-# 2 - Memory Module - New Command
+# A2Q2 - Parameterized FIFO Hierarchical Channel
 
-Provided with a memory module with the functions to read a byte (RDBYT), write a byte (WTBYT), and write a block of 4 bytes (WTBLK), the goal is to write a function that reads a block of 4 bytes (RDBLK). Then, a testbench must be written to test all cases.
+Create a SystemC implementation of a FIFO a.k.a. queue, with a size of 8, with a producer that generates values at twice a rate they are read at.
+
 
 The output of the testbench is shown below:
 
+@  1 ns : Read     , Wrote  0  
+@  6 ns : Read     , Wrote  1  
+@ 11 ns : Read   0 , Wrote   
+@ 11 ns : Read     , Wrote  2  
+@ 16 ns : Read     , Wrote  3  
+@ 21 ns : Read   1 , Wrote   
+@ 21 ns : Read     , Wrote  4  
+@ 26 ns : Read     , Wrote  5  
+@ 31 ns : Read   2 , Wrote   
+@ 31 ns : Read     , Wrote  6  
+@ 36 ns : Read     , Wrote  7  
+@ 41 ns : Read   3 , Wrote   
+@ 41 ns : Read     , Wrote  8  
+@ 46 ns : Read     , Wrote  9  
+@ 51 ns : Read   4 , Wrote   
+@ 51 ns : Read     , Wrote  0  
+@ 56 ns : Read     , Wrote  1  
+@ 61 ns : Read   5 , Wrote   
+@ 61 ns : Read     , Wrote  2  
+@ 66 ns : Read     , Wrote  3  
+@ 71 ns : Read   6 , Wrote   
+@ 71 ns : Read     , Wrote  4  
+@ 81 ns : Read   7 , Wrote   
+@ 81 ns : Read     , Wrote  5  
+@ 91 ns : Read   8 , Wrote   
+@ 91 ns : Read     , Wrote  6  
+@101 ns : Read   9 , Wrote   
+@101 ns : Read     , Wrote  7  
+@111 ns : Read   0 , Wrote   
+@111 ns : Read     , Wrote  8  
+@121 ns : Read   1 , Wrote   
+@121 ns : Read     , Wrote  9  
+@131 ns : Read   2 , Wrote   
+@131 ns : Read     , Wrote  0  
+@141 ns : Read   3 , Wrote   
+@141 ns : Read     , Wrote  1  
+@151 ns : Read   4 , Wrote   
+@151 ns : Read     , Wrote  2  
+@161 ns : Read   5 , Wrote   
+@161 ns : Read     , Wrote  3  
+@171 ns : Read   6 , Wrote   
+@171 ns : Read     , Wrote  4  
+@181 ns : Read   7 , Wrote   
+@181 ns : Read     , Wrote  5  
+@191 ns : Read   8 , Wrote   
+@191 ns : Read     , Wrote  6  
+@201 ns : Read   9 , Wrote   
+@201 ns : Read     , Wrote  7  
 
-------------------------------------------------------------
-TEST STRUCTURE: Tests 1-3 are RDBYT, WRBYT. Tests 4-6 are RDBLK, WRBLK.
-TEST METHODOLOGY: Read from address, write to same address different value, read back address to validate.
-------------------------------------------------------------
-TEST 1: READ 8-bits of data from address 3. Expected XXXXXXXX
-Validating that RDBYT will read unintialized memory, and return garbage.
-@ 41 ns: MEM MODULE : RDBYT, address = 3, data = XXXXXXXX
-@ 61 ns: TST MODULE : RDBYT, address = 3, data = XXXXXXXX
-------------------------------------------------------------
-TEST 2: Write 8-bits of data to address 3.
-Validating WTBYT by writing to the memory just read from, knowing its previous state was garbage.
-@ 81 ns: TST MODULE : WTBYT, address = 3, data = 00000100
-@ 91 ns: MEM MODULE : WTBYT, address = 3, data = 00000100
-------------------------------------------------------------
-TEST 3: READ 8-bits of data from address 3. Expected 00000100
-Validating RDBYT by reading the address just written to. Should be different result than Test 1.
-@141 ns: MEM MODULE : RDBYT, address = 3, data = 00000100
-@161 ns: TST MODULE : RDBYT, address = 3, data = 00000100
-------------------------------------------------------------
-TEST 4: Read 4 x 8bits of data from 4 consecutive memory address, starting at address 0.
-Expected: XXXXXXXX , XXXXXXXX, XXXXXXXX, 00000100
-@191 ns: MEM MODULE : RDBLK-0, address = 0, data = XXXXXXXX
-@201 ns: MEM MODULE : RDBLK-1, address = 1, data = XXXXXXXX
-@211 ns: MEM MODULE : RDBLK-2, address = 2, data = XXXXXXXX
-@221 ns: MEM MODULE : RDBLK-3, address = 3, data = 00000100
-------------------------------------------------------------
-TEST 5: Write 4 x 8bits of data into 4 consecutive memory address, starting from address 0.
-@271 ns: MEM MODULE : WTBLK-0, address = 0, data = 11101110
-@281 ns: MEM MODULE : WTBLK-1, address = 1, data = 11011101
-@291 ns: MEM MODULE : WTBLK-2, address = 2, data = 11001100
-@301 ns: MEM MODULE : WTBLK-3, address = 3, data = 10111011
-------------------------------------------------------------
-TEST 6: Read 4 x 8bits of data from 4 consecutive memory address, starting at address 0.
-@351 ns: MEM MODULE : RDBLK-0, address = 0, data = 11101110
-@361 ns: MEM MODULE : RDBLK-1, address = 1, data = 11011101
-@371 ns: MEM MODULE : RDBLK-2, address = 2, data = 11001100
-@381 ns: MEM MODULE : RDBLK-3, address = 3, data = 10111011
+
+
 

@@ -16,14 +16,14 @@ template <class T> class producer : public sc_module
 			T data = 0;
 			while (true) 
 			{
+				wait();
 				if (out->write(data))
 				{
-					cout << "W " << data << " at " << sc_time_stamp() << endl;
+					cout << "@" << setw(6) << sc_time_stamp() << " : Read    "
+						    << " , Wrote " << setw(2) << data << "  " << endl; 
 					data = (data + 1) % 10;
 				}
 				
-				wait();
-
 			} // end while
 		} // end do writes
 		
