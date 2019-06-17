@@ -1,7 +1,7 @@
 #include "systemc.h"
 #include "fifo_if.h"
 
-template <class T, unsigned size> class fifo : public sc_module, public fifo_out_if <T>, public fifo_in_if <T>
+template <class T, int size> class fifo : public sc_module, public fifo_out_if <T>, public fifo_in_if <T>
 {
 	private:
 		T data[size]; 
