@@ -1,4 +1,6 @@
-#include systemc.h
+#include "systemc.h"
+#include <iostream>
+#include <iomanip>
 
 //#define NOP 0
 #define RDBYT 1
@@ -6,8 +8,6 @@
 #define WTBLK 3
 #define RDBLK 0
 
-static sc_logic Z[8] = {SC_LOGIC_Z, SC_LOGIC_Z, SC_LOGIC_Z, SC_LOGIC_Z,
-		        SC_LOGIC_Z, SC_LOGIC_Z, SC_LOGIC_Z, SC_LOGIC_Z};
 			
 SC_MODULE(mem_ctrl) {
   // Ports
@@ -27,9 +27,11 @@ SC_MODULE(mem_ctrl) {
 	  while (true) {
 	      if (reset.read() == true) complete.write(false);
 	      else {
-		if (new_comm.read() == true) {
+		if (new_comm.read() == true) 
+		{
 		    comm_s = comm.read(); // Sample command port
-		    switch (comm_s) { // See next 2 slides
+		    switch (comm_s) 
+		    { // See next 2 slides
 			/*
 			case NOP:
 			    cout << "@" << sc_time_stamp() << ": NOP" << endl;
@@ -39,7 +41,7 @@ SC_MODULE(mem_ctrl) {
 			case WTBYT:
 			    addr_s = addr.read(); 
 			    data_s = data.read(); // Sample address & data ports
-			    cout << "@" << sc_time_stamp() << ": WTBYT, address = ”
+			    cout << "@" << setw(6) << sc_time_stamp() << ": MEM MODULE : WTBYT, address = "
 				 << addr_s << ", data = " << data_s << endl;
 			    wait(); 
 			    memory[addr_s] = data_s; // After 1 cycle, write into memory space
@@ -48,7 +50,7 @@ SC_MODULE(mem_ctrl) {
 			case RDBYT:
 			    addr_s = addr.read(); // Sample address port
 			    data_s = memory[addr_s]; // Read from memory space
-			    cout << "@" << sc_time_stamp() << ": RDBYT, address = "
+			    cout << "@" << setw(6) << sc_time_stamp() << ": MEM MODULE : RDBYT, address = "
 				 << addr_s << ", data = " << data_s << endl;
 			    wait(); 
 			    data.write(data_s); // After 1 cycle, output to data port
@@ -57,28 +59,28 @@ SC_MODULE(mem_ctrl) {
 			case WTBLK:
 			    addr_s = addr.read(); 
 			    data_s = data.read(); // Sample address & data ports
-			    cout << "@" << sc_time_stamp() << ": WTBLK-0, address = "
+			    cout << "@" << sc_time_stamp() << ": MEM MODULE : WTBLK-0, address = "
 				 << addr_s << ", data = " << data_s << endl;
 			    wait(); 
 			    
 			    memory[addr_s] = data_s; // After 1 cycle, write into memory space
 			    addr_s++; 
 			    data_s = data.read(); // Increment address & sample data port
-			    cout << "@" << sc_time_stamp() << ": WTBLK-1, address = "
+			    cout << "@" << setw(6) << sc_time_stamp() << ": MEM MODULE : WTBLK-1, address = "
 				 << addr_s << ", data = " << data_s << endl;
 			    wait(); 
 			    
 			    memory[addr_s] = data_s; // After 1 cycle, write into memory space
 			    addr_s++; 
 			    data_s = data.read(); // Increment address & sample data port
-			    cout << "@" << sc_time_stamp() << ": WTBLK-2, address = "
+			    cout << "@" << setw(6) << sc_time_stamp() << ": MEM MODULE : WTBLK-2, address = "
 				 << addr_s << ", data = " << data_s << endl;
 			    wait();
 			    
 			    memory[addr_s] = data_s; // After 1 cycle, write into memory space
 			    addr_s++; 
 			    data_s = data.read(); // Increment address & sample data port
-			    cout << "@" << sc_time_stamp() << ": WTBLK-3, address = "
+			    cout << "@" << setw(6) << sc_time_stamp() << ": MEM MODULE : WTBLK-3, address = "
 				 << addr_s << ", data = " << data_s << endl;
 			    wait(); 
 			    
@@ -88,28 +90,28 @@ SC_MODULE(mem_ctrl) {
 			case RDBLK:
 			    addr_s = addr.read();    // Sample address port
 			    data_s = memory[addr_s]; // Read from memory space
-			    cout << "@" << sc_time_stamp() << ": RDBYT-0, address = "
+			    cout << "@" << setw(6) << sc_time_stamp() << ": MEM MODULE : RDBLK-0, address = "
 				 << addr_s << ", data = " << data_s << endl;
 			    wait(); 
 			  
 			    data.write(data_s); // After 1 cycle, output to data port
 			    addr_s++;
 			    data_s = memory[addr_s]; // Read from memory space
-			    cout << "@" << sc_time_stamp() << ": RDBYT-1, address = "
+			    cout << "@" << setw(6) << sc_time_stamp() << ": MEM MODULE : RDBLK-1, address = "
 				 << addr_s << ", data = " << data_s << endl;
 			    wait(); 
 			  
 			    data.write(data_s); // After 1 cycle, output to data port
 			    addr_s++;
 			    data_s = memory[addr_s]; // Read from memory space
-			    cout << "@" << sc_time_stamp() << ": RDBYT-2, address = "
+			    cout << "@" << setw(6) << sc_time_stamp() << ": MEM MODULE : RDBLK-2, address = "
 				 << addr_s << ", data = " << data_s << endl;
 			    wait(); 
 			  
 			    data.write(data_s); // After 1 cycle, output to data port
 			    addr_s++;
 			    data_s = memory[addr_s]; // Read from memory space
-			    cout << "@" << sc_time_stamp() << ": RDBYT-3, address = "
+			    cout << "@" << setw(6) << sc_time_stamp() << ": MEM MODULE : RDBLK-3, address = "
 				 << addr_s << ", data = " << data_s << endl;
 			    wait(); 
 			  

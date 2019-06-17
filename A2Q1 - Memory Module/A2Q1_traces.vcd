@@ -1,0 +1,153 @@
+$date
+     Jun 17, 2019       11:27:52
+$end
+
+$version
+ SystemC 2.3.1-Accellera --- Apr 30 2015 14:13:38
+$end
+
+$timescale
+     1 ns
+$end
+
+$scope module SystemC $end
+$var wire    8  aaaaa  data [7:0]  $end
+$var wire    8  aaaab  addr [7:0]  $end
+$var wire    2  aaaac  comm [1:0]  $end
+$var wire    1  aaaad  new_comm       $end
+$var wire    1  aaaae  complete       $end
+$var wire    1  aaaaf  reset       $end
+$upscope $end
+$enddefinitions  $end
+
+$comment
+All initial values are dumped below at time 0 sec = 0 timescale units.
+$end
+
+$dumpvars
+bXXXXXXXX aaaaa
+b0 aaaab
+b0 aaaac
+0aaaad
+0aaaae
+0aaaaf
+$end
+
+#1
+1aaaaf
+
+#11
+0aaaaf
+
+#21
+b11 aaaab
+b1 aaaac
+
+#31
+1aaaad
+
+#51
+1aaaae
+
+#61
+0aaaad
+
+#71
+b100 aaaaa
+b10 aaaac
+0aaaae
+
+#81
+1aaaad
+
+#101
+1aaaae
+
+#111
+bZZZZZZZZ aaaaa
+0aaaad
+
+#121
+b1 aaaac
+0aaaae
+
+#131
+1aaaad
+
+#151
+b100 aaaaa
+1aaaae
+
+#161
+0aaaad
+
+#171
+bZZZZZZZZ aaaaa
+b0 aaaab
+b0 aaaac
+0aaaae
+
+#181
+1aaaad
+
+#201
+bXXXXXXXX aaaaa
+
+#231
+b100 aaaaa
+1aaaae
+
+#241
+0aaaad
+
+#251
+b11101110 aaaaa
+b11 aaaac
+0aaaae
+
+#261
+1aaaad
+
+#271
+b11011101 aaaaa
+
+#281
+b11001100 aaaaa
+
+#291
+b10111011 aaaaa
+
+#311
+1aaaae
+
+#321
+bZZZZZZZZ aaaaa
+0aaaad
+
+#331
+b0 aaaac
+0aaaae
+
+#341
+1aaaad
+
+#361
+b11101110 aaaaa
+
+#371
+b11011101 aaaaa
+
+#381
+b11001100 aaaaa
+
+#391
+b10111011 aaaaa
+1aaaae
+
+#401
+0aaaad
+
+#411
+bZZZZZZZZ aaaaa
+0aaaae
+

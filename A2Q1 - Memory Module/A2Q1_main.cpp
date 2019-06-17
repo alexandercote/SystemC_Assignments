@@ -31,7 +31,7 @@ int sc_main(int argc, char* argv[])
 
     TB.clk(clk);
     TB.reset(reset);
-    TB.data(data)
+    TB.data(data);
     TB.addr(addr);
     TB.comm(comm);
     TB.new_comm(new_comm);
@@ -47,7 +47,7 @@ int sc_main(int argc, char* argv[])
     sc_trace(Tf, complete, "complete");
     sc_trace(Tf, reset, "reset");
     
-    sc_start (210, SC_NS);
+    sc_start(); // testbench ends the simulation
 
     sc_close_vcd_trace_file(Tf);
 
