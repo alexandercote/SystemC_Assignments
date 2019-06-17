@@ -1,5 +1,5 @@
 #include "systemc.h"
-#include "fifo_if.h"
+
 
 template <class T, int size> class fifo : public sc_module, public fifo_out_if <T>, public fifo_in_if <T>
 {
@@ -8,8 +8,9 @@ template <class T, int size> class fifo : public sc_module, public fifo_out_if <
 		int free, ri, wi;	//free space, read/write index
 		
 		bool read_flag, write_flag, read_status, write_status;
-		char* read_data;
-		char write_data;
+		sc_event write_req, read_req, done;
+		T* read_data;
+		T write_data;
 		
 	
 	public:
@@ -36,7 +37,7 @@ template <class T, int size> class fifo : public sc_module, public fifo_out_if <
 				if (read_flag) 
 				{ // read_flag checked first: higher priority
 					read_flag = false;
-					if (free < N) 
+					if (free < size) 
 					{ // service read
 						*read_data = data[ri];
 						ri = (ri + 1) % size;

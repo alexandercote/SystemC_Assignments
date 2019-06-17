@@ -1,5 +1,5 @@
 #include "systemc.h"
-#include "fifo.h"
+#include "fifo_if.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;
