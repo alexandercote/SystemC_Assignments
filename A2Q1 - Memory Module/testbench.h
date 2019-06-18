@@ -58,6 +58,11 @@ SC_MODULE(A2Q1_testbench)
 				 << addr << ", data = " << data_read << endl;
 			new_comm.write(false);
 			wait();
+			wait();
+			cout << "TEST 1.5: Ensure data bus is released by memory module. Expected ZZZZZZZZ" << endl;
+			data_read = data.read();
+			cout << "@"<< setw(6) << sc_time_stamp() << ": TST MODULE : Check bus data release = " << data_read << endl;
+			
 		  
 		  
 			// TEST 2 - WTBYT - Write 8-bits of data to address 3.
@@ -97,6 +102,11 @@ SC_MODULE(A2Q1_testbench)
 			     << addr << ", data = " << data_read << endl;
 			new_comm.write(false);
 			wait();
+			wait();
+			cout << "TEST 3.5: Ensure data bus is released by memory module. Expected ZZZZZZZZ" << endl;
+			data_read = data.read();
+			cout << "@"<< setw(6) << sc_time_stamp() << ": TST MODULE : Check bus data release = " << data_read << endl;
+			
 		
 			
 			// TEST 4 - RDBLK -  Read 8 bits of data from address 0
@@ -113,6 +123,11 @@ SC_MODULE(A2Q1_testbench)
 			}
 			new_comm.write(false);
 			wait();
+			wait();
+			cout << "TEST 4.5: Ensure data bus is released by memory module. Expected ZZZZZZZZ" << endl;
+			data_read = data.read();
+			cout << "@"<< setw(6) << sc_time_stamp() << ": TST MODULE : Check bus data release = " << data_read << endl;
+			
 			
 			
 			// TEST 5 - WRBLK -  Write 8-bits of data in 4 addresses starting from 0.
@@ -151,6 +166,11 @@ SC_MODULE(A2Q1_testbench)
 			}
 			new_comm.write(false);
 			wait();
+			wait();
+			cout << "TEST 6.5: Ensure data bus is released by memory module. Expected ZZZZZZZZ" << endl;
+			data_read = data.read();
+			cout << "@"<< setw(6) << sc_time_stamp() << ": TST MODULE : Check bus data release = " << data_read << endl;
+			
 			
 			
 			// end simulation
