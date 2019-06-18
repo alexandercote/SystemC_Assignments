@@ -21,8 +21,9 @@ template <class T> class producer : public sc_module
 				{
 					cout << "@" << setw(6) << sc_time_stamp() << " : Read    "
 						    << " , Wrote " << setw(2) << data << "  " << endl; 
-					data = (data + 1) % 10;
+					
 				}
+				data = (data + 1) % 10;
 				
 			} // end while
 		} // end do writes
