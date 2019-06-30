@@ -1,28 +1,55 @@
 #include "systemc.h"
-#include <iostream>
-#include <iomanip>
 
-// Simple dataflow module that runs for a given number of iterations
-template <class T> SC_MODULE (DF_Printer) {
-	sc_fifo_in <T> input;
-	
-	void process() {
-		for (unsigned i = 0; i < n_iterations_; i++) {
-			T value = input.read(); cout << name() << " " << value << endl;
+
+template <class T> class hw_fifo : public sc_module 
+{
+	public:
+		sc_in <bool> clk;
+		sc_in <T>    data_in; 
+		sc_in <bool> valid_in; 
+		sc_in <bool> ready_in;
+		
+		sc_out <T>    data_out; 
+		sc_out <bool> valid_out; 
+		sc_out <bool> ready_out;
+		
+		SC_HAS_PROCESS (hw_fifo);
+		
+		hw_fifo (sc_module_name nm, unsigned size) : sc_module (nm), _size (size) 
+		{
+			assert (size > 0);
+			_first = _items = 0;
+			_data = new T[_size];
+			SC_CTHREAD (main, clk.pos());
+			ready_out.initialize(true);
+			valid_out.initialize(false);
 		}
-		sc_stop(); // terminate after a given number of iterations
-	}
-	
-	SC_HAS_PROCESS (DF_Printer);
-	DF_Printer (sc_module_name NAME, unsigned N_ITERATIONS) :
-	sc_module(NAME), n_iterations_(N_ITERATIONS) {
-		SC_THREAD (process);
-	}
-	unsigned n_iterations_; // number of iterations
-}; 
-
-
-
-
-
-
+		
+		~hw_fifo() { delete[] _data; }
+		
+	protected:
+		void main() 
+		{
+			while (1) 
+			{
+				if (valid_in.read() && ready_out.read()) 
+				{ // write data item into FIFO
+					_data[(_first + _items) % _size] = data_in.read();
+					++_items;
+				}
+				
+				if (ready_in.read() && valid_out.read()) 
+				{ // read data item from FIFO
+					--_items;
+					_first = (_first + 1) % _size;
+				}
+				
+				// Update all output signals
+				ready_out.write(_items < _size); valid_out.write(_items > 0);
+				data_out.write(_data[_first]);
+				wait();
+			}
+		}
+		unsigned _size, _first, _items;
+		T* _data;
+};
